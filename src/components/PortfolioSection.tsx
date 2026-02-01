@@ -17,6 +17,7 @@ const PortfolioSection = () => {
       initial: "T",
       isDemo: true,
       demoLink: "/heating-services",
+      image: "/ChatGPT Image Jan 30, 2026, 07_43_49 PM.png",
     },
     {
       title: "Beauty Studio Nino",
@@ -28,6 +29,8 @@ const PortfolioSection = () => {
       initial: "B",
       isDemo: true,
       demoLink: "/beauty-salon",
+      image: "/generated-image-1.png",
+
     },
     {
       title: "AutoFix Garage",
@@ -37,6 +40,10 @@ const PortfolioSection = () => {
       goals: "Attract more local customers and make it easy to request service quotes online.",
       result: "Beautiful design that reflects the quality and professionalism of the business.",
       initial: "A",
+      isDemo: true,
+      demoLink: "/auto-services",
+      image: "/ChatGPT Image Jan 30, 2026, 07_47_41 PM.png",
+
     },
   ] : [
     {
@@ -49,6 +56,8 @@ const PortfolioSection = () => {
       initial: "თ",
       isDemo: true,
       demoLink: "/heating-services",
+      image: "/ChatGPT Image Jan 30, 2026, 07_43_49 PM.png",
+
     },
     {
       title: "სილამაზის სტუდია ნინო",
@@ -60,6 +69,8 @@ const PortfolioSection = () => {
       initial: "ს",
       isDemo: true,
       demoLink: "/beauty-salon",
+      image: "/generated-image-1.png",
+
     },
     {
       title: "ავტოფიქსი - ავტოსერვისი",
@@ -69,6 +80,10 @@ const PortfolioSection = () => {
       goals: "მეტი ადგილობრივი კლიენტის მოზიდვა და სერვისის მოთხოვნის გამარტივება ონლაინ.",
       result: "ლამაზი დიზაინი, რომელიც ბიზნესის ხარისხსა და პროფესიონალიზმს ასახავს.",
       initial: "ა",
+      isDemo: true,
+      demoLink: "/auto-services",
+      image: "/ChatGPT Image Jan 30, 2026, 07_47_41 PM.png",
+
     },
   ];
 
@@ -94,21 +109,18 @@ const PortfolioSection = () => {
               className="group bg-card rounded-2xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1"
             >
               {/* Project Image */}
-              <div className="aspect-[4/3] bg-secondary relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 rounded-2xl bg-card/90 backdrop-blur flex items-center justify-center mx-auto mb-3">
-                      <span className="text-2xl font-bold text-primary">
-                        {project.initial}
-                      </span>
-                    </div>
-                    <p className="text-sm font-medium text-foreground/80">
-                      {project.category}
-                    </p>
-                  </div>
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                <div className="absolute bottom-3 left-3 text-white text-sm font-medium">
+                  {project.category}
                 </div>
               </div>
+
 
               {/* Project Content */}
               <div className="p-6">
