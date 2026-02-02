@@ -6,6 +6,7 @@ import { MessageCircle, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import emailjs from "@emailjs/browser";
+import { siteConfig } from "@/config/site";
 
 
 const ContactSection = () => {
@@ -84,15 +85,16 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 
-
   const handleWhatsApp = () => {
-    const message = encodeURIComponent(
-      language === 'en' 
-        ? "Hi! I'm interested in getting a website for my business. Can we discuss?"
+    const msg = encodeURIComponent(
+      language === "en"
+        ? "Hi! I'm interested in a website for my business. Can we discuss?"
         : "გამარჯობა! მაინტერესებს ჩემი ბიზნესისთვის ვებსაიტის შექმნა. შეგვიძლია განვიხილოთ?"
     );
-    window.open(`https://wa.me/995555123456?text=${message}`, "_blank");
+
+    window.open(`https://wa.me/${siteConfig.phoneE164}?text=${msg}`, "_blank");
   };
+
 
   return (
     <section id="contact" className="section-padding">

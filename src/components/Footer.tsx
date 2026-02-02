@@ -1,12 +1,15 @@
 import { Heart, MessageCircle, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { siteConfig } from "@/config/site";
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useLanguage();
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/995555123456", "_blank");
+
+    window.open(`https://wa.me/${siteConfig.phoneE164}`, "_blank");
   };
 
   return (
@@ -35,18 +38,18 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Contact</h4>
             <div className="space-y-3">
               <a 
-                href="mailto:hello@georgiaweb.ge" 
+                href="mailto:tnikoloz200@gmail.com" 
                 className="flex items-center gap-2 text-sm text-background/80 hover:text-background transition-colors"
               >
                 <Mail size={14} />
-                hello@georgiaweb.ge
+                tnikoloz200@gmail.com
               </a>
               <button
                 onClick={handleWhatsApp}
                 className="flex items-center gap-2 text-sm text-background/80 hover:text-background transition-colors"
               >
                 <MessageCircle size={14} />
-                +995 555 123 456
+                +995 592 14 40 08
               </button>
             </div>
           </div>
