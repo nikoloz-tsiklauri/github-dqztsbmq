@@ -8,7 +8,7 @@ const PricingSection = () => {
   const pricingPlans = [
     {
       name: t('pricing.starter.name'),
-      price: "$299",
+      price: "₾299",
       description: t('pricing.starter.desc'),
       features: [
         t('pricing.starter.feature1'),
@@ -21,7 +21,7 @@ const PricingSection = () => {
     },
     {
       name: t('pricing.business.name'),
-      price: "$599",
+      price: "₾599",
       description: t('pricing.business.desc'),
       features: [
         t('pricing.business.feature1'),

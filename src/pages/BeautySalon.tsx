@@ -204,10 +204,10 @@ const BeautySalon = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100 overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-400 flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
@@ -223,29 +223,29 @@ const BeautySalon = () => {
 
             <Link
               to="/#portfolio"
-              className="hidden md:inline-flex items-center text-sm font-medium text-gray-600 hover:text-pink-600 transition-colors"
+              className="hidden lg:inline-flex items-center text-sm font-medium text-gray-600 hover:text-pink-600 transition-colors"
             >
               {copy.back}
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-gray-600 hover:text-pink-600 transition-colors">
+            <nav className="hidden lg:flex items-center gap-6 whitespace-nowrap">
+              <a href="#services" className="text-sm text-gray-600 hover:text-pink-600 transition-colors whitespace-nowrap px-2">
                 {copy.nav.services}
               </a>
-              <a href="#about" className="text-gray-600 hover:text-pink-600 transition-colors">
+              <a href="#about" className="text-sm text-gray-600 hover:text-pink-600 transition-colors whitespace-nowrap px-2">
                 {copy.nav.about}
               </a>
-              <a href="#gallery" className="text-gray-600 hover:text-pink-600 transition-colors">
+              <a href="#gallery" className="text-sm text-gray-600 hover:text-pink-600 transition-colors whitespace-nowrap px-2">
                 {copy.nav.gallery}
               </a>
-              <a href="#contact" className="text-gray-600 hover:text-pink-600 transition-colors">
+              <a href="#contact" className="text-sm text-gray-600 hover:text-pink-600 transition-colors whitespace-nowrap px-2">
                 {copy.nav.contact}
               </a>
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
               {/* Language Switch */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => setLang("en")}

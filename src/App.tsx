@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound";
 import AutoServices from "./pages/AutoServices";
 
 import { LanguageProvider } from "@/contexts/LanguageContext";
-
+import ScrollToTop from "@/components/ScrollToTop"
 
 const queryClient = new QueryClient();
 
@@ -32,15 +32,15 @@ const HashScrollFix = () => {
   return null;
 };
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
+// const ScrollToTop = () => {
+//   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [pathname]);
+//   useEffect(() => {
+//     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+//   }, [pathname]);
 
-  return null;
-};
+//   return null;
+// };
 
 
 const App = () => (
@@ -50,6 +50,7 @@ const App = () => (
       <Sonner />
       <LanguageProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/beauty-salon" element={<BeautySalon />} />

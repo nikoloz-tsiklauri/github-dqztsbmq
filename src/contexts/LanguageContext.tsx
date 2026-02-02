@@ -5,6 +5,7 @@ type Language = 'en' | 'ka';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
+  toggleLanguage: () => void;
   t: (key: string) => string;
 }
 
@@ -69,7 +70,7 @@ const translations = {
     'whyWebsite.trust.title': 'Build Customer Trust',
     'whyWebsite.trust.desc': 'A professional website shows you\'re legitimate and serious about your business.',
     'whyWebsite.calls.title': 'Get More Calls',
-    'whyWebsite.calls.desc': 'Your website works 24/7, bringing in leads and inquiries even while you sleep.',
+    'whyWebsite.calls.desc': 'Your website works 24/7, attracting potential customers even while you sleep.',
     'whyWebsite.services.title': 'Show Your Services',
     'whyWebsite.services.desc': 'Give customers a clear view of what you offer and why they should choose you.',
 
@@ -180,10 +181,10 @@ const translations = {
     'hero.headlineHighlight': 'მცირე ბიზნესისთვის',
     'hero.headlineEnd': 'სწრაფად, ხელმისაწვდომად, ეფექტურად.',
     'hero.subheadline': 'ვეხმარებით ადგილობრივ ქართულ ბიზნესებს გახდნენ ხილვადი ონლაინ პროფესიონალური ვებსაიტებით, რომლებიც სწრაფად იქმნება თანამედროვე ტექნოლოგიებით.',
-    'hero.viewWork': 'ნახე ჩემი სამუშაოები',
+    'hero.viewWork': 'ნახე ჩემი ნამუშევრები',
     'hero.getDemo': 'მიიღე უფასო დემო',
     'hero.trustedBy': 'ენდობიან ადგილობრივი ბიზნესები მთელ საქართველოში',
-    'hero.projects': 'შესრულებული პროექტი',
+    'hero.projects': 'შესრულებული პროექტები',
     'hero.satisfaction': 'კმაყოფილი კლიენტი',
     'hero.delivery': 'საშუალო დრო',
     'hero.days': '5 დღე',
@@ -197,7 +198,7 @@ const translations = {
     'services.ai.title': 'AI-ზე დაფუძნებული კონტენტი',
     'services.ai.desc': 'ვიყენებთ ჭკვიან AI ხელსაწყოებს თქვენი ვებსაიტისთვის მიმზიდველი კონტენტისა და ვიზუალების შესაქმნელად — ვზოგავთ დროს და ვინარჩუნებთ ხელმისაწვდომ ფასებს.',
     'services.mobile.title': 'მობილურზე ოპტიმიზებული',
-    'services.mobile.desc': 'ყველა ვებსაიტი იდეალურად გამოიყურება ტელეფონებსა და ტაბლეტებზე. სწრაფი ჩატვირთვა ნიშნავს, რომ კლიენტები არ დაელოდებიან.',
+    'services.mobile.desc': 'ყველა ვებსაიტი იდეალურად გამოიყურება ტელეფონებსა და ტაბლეტებზე. სწრაფი ჩატვირთვის სიჩქარე ნიშნავს, რომ თქვენი მომხმარებლები არ დაელოდებიან — და არც საძიებო სისტემები.',
 
     // How It Works
     'howItWorks.title': 'როგორ',
@@ -208,21 +209,21 @@ const translations = {
     'howItWorks.step2.title': 'ვქმნით დიზაინს',
     'howItWorks.step2.desc': 'ვქმნით ლამაზ ვებსაიტს თქვენს ბიზნესსა და ბრენდზე მორგებულს.',
     'howItWorks.step3.title': 'თქვენ ამოწმებთ',
-    'howItWorks.step3.desc': 'ნახეთ ვებსაიტი, შემოგვთავაზეთ ცვლილებები და დაამტკიცეთ.',
-    'howItWorks.step4.title': 'გავშვებთ!',
+    'howItWorks.step3.desc': 'იხილეთ თქვენი ვებსაიტი, გვითხარით ცვლილებები და დაადასტურეთ, როცა კმაყოფილი დარჩებით.',
+    'howItWorks.step4.title': 'გავუშვებთ!',
     'howItWorks.step4.desc': 'თქვენი ვებსაიტი იწყებს მუშაობას და ახალი კლიენტების მოზიდვას.',
 
     // Why Website
     'whyWebsite.title': 'რატომ სჭირდება თქვენს ბიზნესს',
     'whyWebsite.titleHighlight': 'ვებსაიტი',
-    'whyWebsite.desc1': 'დღევანდელ ციფრულ სამყაროში ვებსაიტის არქონა იგივეა, რაც ტელეფონის ნომრის არქონა. კლიენტები ელიან, რომ თქვენ ონლაინ იპოვონ.',
-    'whyWebsite.desc2': 'კარგად დიზაინებული ვებსაიტი მხოლოდ ციფრული სავიზიტო ბარათი არ არის. ეს თქვენი ყველაზე ძლიერი მარკეტინგული ინსტრუმენტია.',
-    'whyWebsite.found.title': 'იპოვონ Google-ში',
-    'whyWebsite.found.desc': 'როდესაც კლიენტები თქვენს სერვისებს ეძებენ, თქვენ იპოვონ — არა კონკურენტები.',
+    'whyWebsite.desc1': 'დღევანდელ ციფრულ სამყაროში ვებსაიტის არქონა იგივეა, რაც ტელეფონის ნომრის არქონა. კლიენტები ელიან, რომ თქვენ ონლაინ გიპოვონ.',
+    'whyWebsite.desc2': 'კარგად დადიზაინებული ვებსაიტი მხოლოდ ციფრული სავიზიტო ბარათი არ არის. ეს თქვენი ყველაზე ძლიერი მარკეტინგული ინსტრუმენტია.',
+    'whyWebsite.found.title': 'გიპოვონ Google-ში',
+    'whyWebsite.found.desc': 'როდესაც კლიენტები თქვენს სერვისებს ეძებენ, გიპოვონ თქვენ და არა კონკურენტები.',
     'whyWebsite.trust.title': 'ააშენეთ ნდობა',
     'whyWebsite.trust.desc': 'პროფესიონალური ვებსაიტი აჩვენებს, რომ სერიოზულად ეკიდებით თქვენს საქმეს.',
     'whyWebsite.calls.title': 'მიიღეთ მეტი ზარი',
-    'whyWebsite.calls.desc': 'თქვენი ვებსაიტი 24/7 მუშაობს და მოგიტანთ მოთხოვნებს ძილის დროსაც კი.',
+    'whyWebsite.calls.desc': 'თქვენი ვებსაიტი მუშაობს 24/7, იზიდავს პოტენციურ მომხმარებლებს მაშინაც კი, როცა თქვენ გძინავთ.',
     'whyWebsite.services.title': 'აჩვენეთ სერვისები',
     'whyWebsite.services.desc': 'მიეცით კლიენტებს ნათელი წარმოდგენა, თუ რას სთავაზობთ.',
 
@@ -269,7 +270,7 @@ const translations = {
     'pricing.customText': ' პერსონალიზებული შემოთავაზებისთვის.',
 
     // About
-    'about.title': '',
+    'about.title': ' ',
     'about.titleHighlight': 'GeorgiaWeb-ის შესახებ',
     'about.intro': 'გამარჯობა, მე ვარ გიო — ახალგაზრდა ვებ-დეველოპერი საქართველოდან, რომელსაც უყვარს მცირე ბიზნესების წარმატებაში დახმარება.',
     'about.desc1': 'მჯერა, რომ ყველა ადგილობრივ ბიზნესს ეკუთვნის პროფესიონალური ონლაინ პრეზენცია, ბიუჯეტის მიუხედავად. ამიტომ ვიყენებ თანამედროვე ინსტრუმენტებსა და AI ტექნოლოგიას.',
@@ -299,7 +300,7 @@ const translations = {
     'contact.sent': 'გაგზავნილია!',
     'contact.whatsappTitle': 'გირჩევნიათ WhatsApp?',
     'contact.whatsappDesc': 'პირდაპირ მოგვწერეთ WhatsApp-ზე სწრაფი პასუხისთვის. ჩვეულებრივ რამდენიმე საათში ვპასუხობთ.',
-    'contact.whatsappButton': 'წერა WhatsApp-ზე',
+    'contact.whatsappButton': 'მოგვწერეთ WhatsApp-ზე',
     'contact.freeDemo': 'უფასო დემო',
     'contact.freeDemoDesc': 'ნახეთ თქვენი ვებსაიტის პრევიუ გადაწყვეტილების მიღებამდე.',
     'contact.fastResponse': 'სწრაფი პასუხი',
@@ -322,13 +323,17 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('en');
 
+  const toggleLanguage = useCallback(() => {
+    setLanguage((prev) => (prev === 'en' ? 'ka' : 'en'));
+  }, []);
+
   const t = useCallback((key: string): string => {
     const translation = translations[language][key as keyof typeof translations['en']];
     return translation || key;
   }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

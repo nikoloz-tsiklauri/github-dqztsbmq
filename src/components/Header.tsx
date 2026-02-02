@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import useActiveSection from "@/hooks/use-active-section";
+import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const location = useLocation();
 
   const navLinks = [
     { href: "#services", label: t('nav.services') },
@@ -18,35 +21,51 @@ const Header = () => {
     { href: "#contact", label: t('nav.contact') },
   ];
 
+  // Use the reusable hook that combines IntersectionObserver + scroll fallback
+  const ids = navLinks.map((l) => l.href.replace('#', ''));
+  const [activeSection, setActiveSection] = useActiveSection(ids, {
+    headerOffset: 96,
+    bottomThreshold: 50,
+    watch: location.pathname,
+  });
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 overflow-x-hidden">
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          {/* LEFT: Logo */}
+          <a href="#" className="flex items-center gap-2 shrink-0">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">GW</span>
             </div>
             <span className="font-semibold text-foreground">GeorgiaWeb</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* CENTER: Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-6 whitespace-nowrap">
+            {navLinks.map((link) => {
+              const id = link.href.replace('#', '');
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setActiveSection(id)}
+                  className={`transition-colors ${
+                    activeSection === id
+                      ? 'text-blue-600 font-semibold'
+                      : 'text-slate-600 hover:text-blue-600'
+                  } text-sm lg:text-sm whitespace-nowrap px-2`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
 
-          {/* Language Switcher & CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* RIGHT: Language Switcher & CTA */}
+          <div className="hidden md:flex items-center gap-4 shrink-0 whitespace-nowrap">
             {/* Language Switcher */}
-            <div className="flex items-center bg-secondary rounded-lg p-1">
+            <div className="flex items-center gap-3 shrink-0 bg-secondary rounded-lg p-1">
               <button
                 onClick={() => setLanguage('en')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
@@ -112,16 +131,26 @@ const Header = () => {
                 </button>
               </div>
 
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const id = link.href.replace('#', '');
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setActiveSection(id);
+                    }}
+                    className={`transition-colors ${
+                      activeSection === id
+                        ? 'text-blue-600 font-semibold'
+                        : 'text-slate-600 hover:text-blue-600'
+                    } text-sm`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
               <Button size="sm" className="w-fit" asChild>
                 <a href="#contact" onClick={() => setIsMenuOpen(false)}>
                   {t('nav.getStarted')}

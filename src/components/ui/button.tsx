@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 button-shadow hover:button-shadow-hover hover:-translate-y-0.5",
+        default: "bg-gradient-to-r from-blue-500 to-cyan-500 text-white button-shadow hover:shadow-md hover:-translate-y-0.5",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-primary text-primary-foreground hover:bg-primary/90 button-shadow hover:button-shadow-hover hover:-translate-y-0.5 text-base px-6 py-3 h-auto",
-        heroOutline: "border-2 border-foreground/20 bg-transparent text-foreground hover:bg-foreground/5 hover:border-foreground/30 text-base px-6 py-3 h-auto",
+        hero: "bg-gradient-to-r from-blue-500 to-cyan-500 text-white button-shadow hover:shadow-lg hover:-translate-y-0.5 text-base px-6 py-3 h-auto",
+        heroOutline: "border-2 border-blue-500 text-blue-600 hover:bg-blue-50 text-base px-6 py-3 h-auto",
         whatsapp: "bg-[hsl(142_70%_45%)] text-white hover:bg-[hsl(142_70%_40%)] button-shadow hover:button-shadow-hover hover:-translate-y-0.5",
       },
       size: {

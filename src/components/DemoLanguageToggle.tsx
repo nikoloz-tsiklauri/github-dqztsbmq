@@ -19,7 +19,7 @@ export default function DemoLanguageToggle() {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 shrink-0 whitespace-nowrap">
       <Button
         variant={language === "en" ? "default" : "outline"}
         size="sm"

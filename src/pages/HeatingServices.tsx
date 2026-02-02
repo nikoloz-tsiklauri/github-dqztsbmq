@@ -17,6 +17,7 @@ import DemoLanguageToggle from "@/components/DemoLanguageToggle";
 
 const HeatingServices = () => {
   const { language } = useLanguage();
+  const isKa = language === "ka";
 
   const copy =
     language === "en"
@@ -207,7 +208,7 @@ const HeatingServices = () => {
             call: "დარეკვა",
             wa: "WhatsApp",
             waMsg: "WhatsApp შეტყობინება",
-            quote: "უფასო ფასის მოთხოვნა",
+            quote: "ფასის მოთხოვნა",
           },
           hero: {
             title: "გათბობის და რადიატორების სერვისი თბილისში",
@@ -309,7 +310,7 @@ const HeatingServices = () => {
             },
             {
               title: "პატიოსანი ფასები",
-              description: "ფასი წინასწარ გეთანხმება — უხილავი გადასახადების გარეშე.",
+              description: "ფასის წინასწარ შეთანხმება — უხილავი გადასახადების გარეშე.",
             },
             {
               title: "სუფთა სამუშაო",
@@ -365,75 +366,92 @@ const HeatingServices = () => {
           ],
         };
 
+  // Prepare back link pieces (keep translations unchanged): separate leading arrow to avoid merging with Georgian letters
+  const _rawBack = copy.back ?? "";
+  const _hasLeadingArrow = _rawBack.trim().startsWith("←");
+  const _backText = _hasLeadingArrow ? _rawBack.replace(/^[←\s]+/, "") : _rawBack;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-blue-50">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
+          <div className={isKa ? "flex items-center justify-between lg:h-20 py-1 lg:py-0" : "flex items-center justify-between lg:h-20 py-3 lg:py-0"}>
+            {/* Left: logo + back link */}
+            {/* Left: logo + back link */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 min-w-0">
+              <div className="flex items-center gap-2 shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+                  className="text-2xl font-bold text-slate-900 leading-none"
+                >
+                  {copy.brand}
+                </button>
               </div>
 
-              {/* Logo scroll-to-top */}
-              <button
-                type="button"
-                onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-                className="text-2xl font-bold text-slate-900"
-              >
-                {copy.brand}
-              </button>
-            </div>
-
+              {/* Back to portfolio */}
             <Link
               to="/#portfolio"
-              className="hidden md:inline-flex items-center text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+              className={isKa ? "hidden sm:inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors leading-normal tracking-normal whitespace-nowrap overflow-hidden truncate max-w-[220px]" : "hidden sm:inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors leading-normal tracking-normal whitespace-normal break-words max-w-[220px]"}
+              aria-label="Back to portfolio"
             >
-              {copy.back}
+              {_hasLeadingArrow && <span className="shrink-0 leading-normal tracking-normal mr-1">←</span>}
+              <span className={isKa ? "truncate" : ""}>{_backText}</span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-slate-600 hover:text-blue-600 transition-colors">
-                {copy.nav.services}
-              </a>
-              <a href="#why-us" className="text-slate-600 hover:text-blue-600 transition-colors">
-                {copy.nav.why}
-              </a>
-              <a href="#projects" className="text-slate-600 hover:text-blue-600 transition-colors">
-                {copy.nav.projects}
-              </a>
-              <a href="#reviews" className="text-slate-600 hover:text-blue-600 transition-colors">
-                {copy.nav.reviews}
-              </a>
-              <a href="#contact" className="text-slate-600 hover:text-blue-600 transition-colors">
-                {copy.nav.contact}
-              </a>
-            </nav>
+            </div>
 
-            <div className="flex items-center gap-3">
-              <DemoLanguageToggle />
-              <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 hidden sm:flex">
-                <Phone className="w-4 h-4 mr-2" />
-                {copy.btns.call}
-              </Button>
-              <Button variant="outline" className="hidden sm:flex border-blue-300 text-blue-600 hover:bg-blue-50">
-                <MessageCircle className="w-4 h-4 mr-2" />
-                {copy.btns.wa}
-              </Button>
+
+            {/* Right: nav + language toggle + buttons */}
+            <div className={isKa ? "flex items-center gap-4" : "flex items-center gap-6"}>
+              <nav className="hidden lg:flex items-center gap-6 ml-6 whitespace-nowrap min-w-0">
+                <a href="#services" className="text-sm text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
+                  {copy.nav.services}
+                </a>
+                <a href="#why-us" className="text-sm text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
+                  {copy.nav.why}
+                </a>
+                <a href="#projects" className="text-sm text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
+                  {copy.nav.projects}
+                </a>
+                <a href="#reviews" className="text-sm text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
+                  {copy.nav.reviews}
+                </a>
+                <a href="#contact" className="text-sm text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
+                  {copy.nav.contact}
+                </a>
+              </nav>
+
+              <div className={isKa ? "flex items-center gap-2 shrink-0 whitespace-nowrap text-sm" : "flex items-center gap-3 shrink-0 whitespace-nowrap"}>
+                <DemoLanguageToggle />
+                <Button className={`bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 hidden sm:inline-flex ${isKa ? 'h-10 px-3 text-sm' : ''}`}>
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span className={isKa ? 'text-sm' : ''}>{copy.btns.call}</span>
+                </Button>
+                <Button variant="outline" className={`hidden sm:inline-flex border-blue-300 text-blue-600 hover:bg-blue-50 ${isKa ? 'h-10 px-3 text-sm' : ''}`}>
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  <span className="hidden md:inline">{copy.btns.wa}</span>
+                  <span className="inline md:hidden">WA</span>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-32 pb-24 bg-gradient-to-b from-white to-blue-50 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight text-slate-900">
+              <h1 className="font-heading text-5xl md:text-6xl font-bold leading-tight text-slate-900">
                 {copy.hero.title}
-                <span className="block text-blue-600">{copy.hero.subtitle}</span>
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">{copy.hero.subtitle}</span>
               </h1>
 
               <p className="text-xl text-slate-600 leading-relaxed">{copy.hero.desc}</p>

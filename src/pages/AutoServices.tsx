@@ -20,6 +20,12 @@ type Lang = "en" | "ka";
 
 const AutoServices = () => {
   const [lang, setLang] = useState<Lang>("en");
+  const isKa = lang === "ka";
+
+  // prepare back link pieces to keep arrow separate from Georgian letters
+  const _rawBack = (lang === "ka" ? "← პორტფოლიოზე დაბრუნება" : "← Back to Portfolio");
+  const _hasLeadingArrow = _rawBack.trim().startsWith("←");
+  const _backText = _hasLeadingArrow ? _rawBack.replace(/^[←\s]+/, "") : _rawBack;
 
   // ყოველი გვერდის გახსნაზე ზევით აიყვანოს (გეხმარება იმ პრობლემაზეც რაც გქონდა scroll-ზე)
   useEffect(() => {
@@ -117,7 +123,7 @@ const AutoServices = () => {
         heroTitle: "თანამედროვე ავტოსერვისი",
         heroSub: "სწრაფი, გამჭვირვალე, პროფესიონალური",
         heroDesc:
-          "დიაგნოსტიკა, ზეთის შეცვლა, მუხრუჭები, სავალი ნაწილი, კონდიციონერი და სხვა. გასაგები ფასები, სწრაფი რეაგირება და ხარისხიანი სერვისი — დაკავებული მძღოლებისთვის.",
+          "დიაგნოსტიკა, ზეთის შეცვლა, მუხრუჭები, სავალი ნაწილი, კონდიციონერი და სხვა. მისაღები ფასები, სწრაფი რეაგირება და ხარისხიანი სერვისი — დაკავებული მძღოლებისთვის.",
         perks: { slots: "დღესვე მიღება", warranty: "გარანტია სამუშაოზე", reviews: "5★ შეფასებები" },
         cta: { quote: "ფასის მოთხოვნა", see: "სერვისების ნახვა" },
         stats: { cars: "მომსახურებული მანქანა", years: "წლის გამოცდილება", rating: "კლიენტების შეფასება" },
@@ -130,7 +136,7 @@ const AutoServices = () => {
           { title: "მუხრუჭები", desc: "ხუნდები, დისკები, სითხე — უსაფრთხო დამუხრუჭებისთვის." },
           { title: "ზეთი და ფილტრები", desc: "ზეთის და ფილტრების შეცვლა რეკომენდებული სპეციფიკაციით." },
           { title: "სავალი ნაწილი", desc: "ამორტიზატორები, ბუშინგები, გასწორება და შეკეთება." },
-          { title: "სწრაფი სერვისი", desc: "დაკავებული მძღოლებისთვის — სწრაფი სამუშაოები და დღესვე დროები." },
+          { title: "სწრაფი სერვისი", desc: "სწრაფი გამოსწორება დაკავებული მძღოლებისთვის — იმავე დღეს დაჯავშნის ვარიანტები." },
           { title: "ყიდვამდე შემოწმება", desc: "შეიძინე მანქანა მშვიდად — დეტალური რეპორტით." },
         ],
 
@@ -197,10 +203,10 @@ const AutoServices = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/70 backdrop-blur-md border-b border-slate-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/70 backdrop-blur-md border-b border-slate-800 overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-2">
+          <div className={isKa ? "flex items-center justify-between h-16 py-1" : "flex items-center justify-between h-20"}>
+            <div className="flex items-center gap-2 shrink-0">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
                 <Wrench className="w-5 h-5 text-white" />
               </div>
@@ -217,59 +223,57 @@ const AutoServices = () => {
             {/* Back to portfolio */}
             <Link
               to="/#portfolio"
-              className="hidden md:inline-flex items-center text-sm font-medium text-slate-300 hover:text-orange-300 transition-colors"
+              className={isKa ? "hidden lg:inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-orange-300 transition-colors leading-normal tracking-normal whitespace-nowrap overflow-hidden truncate max-w-[220px]" : "hidden lg:inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-orange-300 transition-colors leading-normal tracking-normal whitespace-nowrap"}
             >
-              {t.back}
+              {_hasLeadingArrow && <span className="shrink-0 mr-1">←</span>}
+              <span className={isKa ? "truncate" : ""}>{_backText}</span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-slate-300 hover:text-white transition-colors">
+            <nav className={isKa ? "hidden lg:flex items-center gap-4 whitespace-nowrap min-w-0" : "hidden lg:flex items-center gap-6 whitespace-nowrap min-w-0"}>
+              <a href="#services" className="text-sm text-slate-300 hover:text-white transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
                 {t.nav.services}
               </a>
-              <a href="#why-us" className="text-slate-300 hover:text-white transition-colors">
+              <a href="#why-us" className="text-sm text-slate-300 hover:text-white transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
                 {t.nav.why}
               </a>
-              <a href="#location" className="text-slate-300 hover:text-white transition-colors">
+              <a href="#location" className="text-sm text-slate-300 hover:text-white transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
                 {t.nav.location}
               </a>
-              <a href="#contact" className="text-slate-300 hover:text-white transition-colors">
+              <a href="#contact" className="text-sm text-slate-300 hover:text-white transition-colors whitespace-nowrap px-2 tracking-normal leading-normal">
                 {t.nav.contact}
               </a>
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className={isKa ? "flex items-center gap-2 shrink-0 whitespace-nowrap text-sm" : "flex items-center gap-3 shrink-0 whitespace-nowrap"}>
               {/* Language switch */}
-              <div className="flex items-center gap-2">
+              <div className={isKa ? "flex items-center gap-1" : "flex items-center gap-2"}>
                 <button
                   type="button"
                   onClick={() => setLang("en")}
-                  className={`px-3 py-1 rounded-md text-sm font-medium ${
-                    lang === "en" ? "bg-orange-500 text-white" : "bg-white/10 text-slate-200"
-                  }`}
+                  className={`rounded-md text-sm font-medium ${lang === "en" ? "bg-orange-500 text-white" : "bg-white/10 text-slate-200"} ${isKa ? 'px-2 py-1' : 'px-3 py-1'}`}
                 >
                   EN
                 </button>
                 <button
                   type="button"
                   onClick={() => setLang("ka")}
-                  className={`px-3 py-1 rounded-md text-sm font-medium ${
-                    lang === "ka" ? "bg-orange-500 text-white" : "bg-white/10 text-slate-200"
-                  }`}
+                  className={`rounded-md text-sm font-medium ${lang === "ka" ? "bg-orange-500 text-white" : "bg-white/10 text-slate-200"} ${isKa ? 'px-2 py-1' : 'px-3 py-1'}`}
                 >
                   KA
                 </button>
               </div>
 
-              <Button className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 hidden sm:flex">
+              <Button className={`bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 hidden sm:inline-flex ${isKa ? 'h-10 px-3 text-sm' : ''}`}>
                 <Phone className="w-4 h-4 mr-2" />
-                {t.callNow}
+                <span className={isKa ? 'text-sm' : ''}>{t.callNow}</span>
               </Button>
               <Button
                 variant="outline"
-                className="hidden sm:flex border-orange-400/40 text-orange-200 hover:bg-orange-500/10"
+                className={`hidden sm:inline-flex border-orange-400/40 text-orange-200 hover:bg-orange-500/10 ${isKa ? 'h-10 px-3 text-sm' : ''}`}
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
-                {t.whatsapp}
+                <span className="hidden md:inline">{t.whatsapp}</span>
+                <span className="inline md:hidden">WA</span>
               </Button>
             </div>
           </div>
@@ -277,121 +281,139 @@ const AutoServices = () => {
       </header>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-200 text-sm font-medium border border-orange-400/20">
-                <Car className="w-4 h-4" />
-                <span>{t.badge}</span>
-              </div>
+      <section className="pt-32 pb-24 bg-gradient-to-b from-slate-100 via-white to-slate-200 px-4">
+  <div className="max-w-7xl mx-auto">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      
+      {/* LEFT SIDE */}
+      <div className="space-y-8 bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-slate-200">
+        
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-600 text-sm font-medium border border-orange-300/40">
+          <Car className="w-4 h-4" />
+          <span>{t.badge}</span>
+        </div>
 
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                {t.heroTitle}
-                <span className="block text-orange-400">{t.heroSub}</span>
-              </h1>
+        <h1 className="font-heading text-5xl md:text-6xl font-bold leading-tight text-slate-900">
+          {t.heroTitle}
+          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
+            {t.heroSub}
+          </span>
+        </h1>
 
-              <p className="text-xl text-slate-300 leading-relaxed">{t.heroDesc}</p>
+        <p className="text-xl text-slate-600 leading-relaxed">{t.heroDesc}</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-4">
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-4 border border-white/10">
-                  <Clock className="w-5 h-5 text-orange-300 shrink-0" />
-                  <span className="text-sm font-medium text-slate-200">{t.perks.slots}</span>
-                </div>
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-4 border border-white/10">
-                  <ShieldCheck className="w-5 h-5 text-orange-300 shrink-0" />
-                  <span className="text-sm font-medium text-slate-200">{t.perks.warranty}</span>
-                </div>
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-4 border border-white/10">
-                  <Star className="w-5 h-5 text-orange-300 shrink-0" />
-                  <span className="text-sm font-medium text-slate-200">{t.perks.reviews}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 h-14 px-8 text-lg"
-                >
-                  {t.cta.quote}
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-14 px-8 text-lg border-2 border-orange-400/40 text-orange-200 hover:bg-orange-500/10"
-                >
-                  {t.cta.see}
-                </Button>
-              </div>
-
-              <div className="flex items-center gap-8 pt-4">
-                <div>
-                  <p className="text-3xl font-bold">800+</p>
-                  <p className="text-sm text-slate-300">{t.stats.cars}</p>
-                </div>
-                <div className="w-px h-12 bg-white/15" />
-                <div>
-                  <p className="text-3xl font-bold">15+</p>
-                  <p className="text-sm text-slate-300">{t.stats.years}</p>
-                </div>
-                <div className="w-px h-12 bg-white/15" />
-                <div>
-                  <p className="text-3xl font-bold">4.9★</p>
-                  <p className="text-sm text-slate-300">{t.stats.rating}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                <img
-                  src="https://images.pexels.com/photos/4489733/pexels-photo-4489733.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                  alt="Auto repair shop"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="absolute -bottom-6 -right-6 bg-slate-950/80 rounded-2xl shadow-xl p-6 max-w-xs border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Gauge className="w-5 h-5 text-orange-300" />
-                  <span className="text-sm text-slate-300">{t.next.label}</span>
-                </div>
-                <p className="text-lg font-semibold">{t.next.time}</p>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-4">
+          <div className="flex items-center gap-3 bg-slate-50 rounded-lg p-4 border border-slate-200">
+            <Clock className="w-5 h-5 text-orange-500 shrink-0" />
+            <span className="text-sm font-medium text-slate-700">{t.perks.slots}</span>
+          </div>
+          <div className="flex items-center gap-3 bg-slate-50 rounded-lg p-4 border border-slate-200">
+            <ShieldCheck className="w-5 h-5 text-orange-500 shrink-0" />
+            <span className="text-sm font-medium text-slate-700">{t.perks.warranty}</span>
+          </div>
+          <div className="flex items-center gap-3 bg-slate-50 rounded-lg p-4 border border-slate-200">
+            <Star className="w-5 h-5 text-orange-500 shrink-0" />
+            <span className="text-sm font-medium text-slate-700">{t.perks.reviews}</span>
           </div>
         </div>
-      </section>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 h-14 px-8 text-lg text-white"
+          >
+            {t.cta.quote}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-14 px-8 text-lg border-2 border-orange-400 text-orange-600 hover:bg-orange-50"
+          >
+            {t.cta.see}
+          </Button>
+        </div>
+
+        <div className="flex items-center gap-8 pt-4">
+          <div>
+            <p className="text-3xl font-bold text-slate-900">800+</p>
+            <p className="text-sm text-slate-600">{t.stats.cars}</p>
+          </div>
+          <div className="w-px h-12 bg-slate-300" />
+          <div>
+            <p className="text-3xl font-bold text-slate-900">15+</p>
+            <p className="text-sm text-slate-600">{t.stats.years}</p>
+          </div>
+          <div className="w-px h-12 bg-slate-300" />
+          <div>
+            <p className="text-3xl font-bold text-slate-900">4.9★</p>
+            <p className="text-sm text-slate-600">{t.stats.rating}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* RIGHT IMAGE */}
+      <div className="relative">
+        <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
+          <img
+            src="https://images.pexels.com/photos/4489733/pexels-photo-4489733.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Auto repair shop"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 max-w-xs border border-slate-200">
+          <div className="flex items-center gap-2 mb-2">
+            <Gauge className="w-5 h-5 text-orange-500" />
+            <span className="text-sm text-slate-600">{t.next.label}</span>
+          </div>
+          <p className="text-lg font-semibold text-slate-900">{t.next.time}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* Services */}
-      <section id="services" className="py-20 px-4 bg-slate-950/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              {t.servicesTitle} <span className="text-orange-400"></span>
-            </h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">{t.servicesSub}</p>
-          </div>
+      <section id="services" className="py-20 px-4 bg-slate-950">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+        {t.servicesTitle} <span className="text-orange-400"></span>
+      </h2>
+      <p className="text-xl text-slate-300 max-w-2xl mx-auto">{t.servicesSub}</p>
+    </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.serviceCards.map((s, i) => {
-              const Icon = serviceIcons[i] ?? Wrench;
-              return (
-                <div
-                  key={i}
-                  className="group bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-orange-400/30 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-3">{s.title}</h3>
-                  <p className="text-slate-300 leading-relaxed">{s.desc}</p>
-                </div>
-              );
-            })}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {t.serviceCards.map((s, i) => {
+        const Icon = serviceIcons[i] ?? Wrench;
+        return (
+          <div
+            key={i}
+            className="group rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2
+              bg-white p-8 border border-white/60"
+          >
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Icon className="w-8 h-8 text-white" />
+            </div>
+
+            {/* ✅ title should be dark */}
+            <h3 className="text-2xl font-semibold mb-3 text-slate-900">
+              {s.title}
+            </h3>
+
+            {/* ✅ desc should be medium-dark */}
+            <p className="text-slate-600 leading-relaxed">
+              {s.desc}
+            </p>
           </div>
-        </div>
-      </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
 
       {/* Why Us */}
       <section id="why-us" className="py-20 px-4">

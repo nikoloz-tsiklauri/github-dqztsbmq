@@ -5,6 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { MessageCircle, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import emailjs from "@emailjs/browser";
+
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -27,18 +29,36 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  try {
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
-    setIsSubmitting(false);
+    if (!serviceId || !templateId || !publicKey) {
+      throw new Error("Missing EmailJS env variables");
+    }
+
+    await emailjs.send(
+      serviceId,
+      templateId,
+      {
+        from_name: formData.name,
+        business_name: formData.businessName,
+        reply_to: formData.contact,
+        message: formData.message,
+      },
+      { publicKey }
+    );
+
     setIsSubmitted(true);
+
     toast({
-      title: t('contact.successTitle'),
-      description: t('contact.successDesc'),
+      title: t("contact.successTitle"),
+      description: t("contact.successDesc"),
     });
 
     setFormData({
@@ -49,7 +69,21 @@ const ContactSection = () => {
     });
 
     setTimeout(() => setIsSubmitted(false), 3000);
-  };
+  } catch (err) {
+    console.error(err);
+    toast({
+      title: language === "en" ? "Failed to send" : "გაგზავნა ვერ მოხერხდა",
+      description:
+        language === "en"
+          ? "Please try again or contact us on WhatsApp."
+          : "სცადე თავიდან ან მოგვწერე WhatsApp-ზე.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent(

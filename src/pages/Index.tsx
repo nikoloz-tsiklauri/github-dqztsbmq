@@ -14,9 +14,9 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 const Index = () => {
   return (
     <LanguageProvider>
-      <div className="min-h-screen">
+      <div className="min-h-screen font-sans bg-gradient-to-b from-slate-50 via-white to-blue-50 scroll-smooth">
         <Header />
-        <main>
+        <main className="overflow-hidden">
           <HeroSection />
           <ServicesSection />
           <HowItWorksSection />

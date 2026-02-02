@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+         sans: ['Inter', 'Noto Sans Georgian', 'system-ui', 'sans-serif'],
+        heading: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -25,6 +26,11 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+        },
+        // Brand colors for design system
+        brand: {
+          blue: '#3B82F6',
+          accent: '#06B6D4',
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

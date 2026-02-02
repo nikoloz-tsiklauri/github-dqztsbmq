@@ -9,7 +9,7 @@ const TestimonialsSection = () => {
       name: "Davit Khachidze",
       business: "TbilisiHeat - Heating Services",
       avatar: "DK",
-      text: "Gio created an amazing website for my heating business. Now customers find me on Google and I get 3-4 new calls every week. Highly recommend!",
+      text: "Gio created an amazing website for my heating business. Now customers find me on Google and I get 10-15 new calls every week. Highly recommend!",
       rating: 5,
     },
     {
@@ -31,7 +31,7 @@ const TestimonialsSection = () => {
       name: "დავით ხაჩიძე",
       business: "თბილისიჰითი - გათბობის სერვისები",
       avatar: "დხ",
-      text: "გიომ შესანიშნავი ვებსაიტი შემიქმნა ჩემი გათბობის ბიზნესისთვის. ახლა კლიენტები Google-ში მპოულობენ და ყოველ კვირა 3-4 ახალი ზარი მაქვს.",
+      text: "გიომ შესანიშნავი ვებსაიტი შემიქმნა ჩემი გათბობის ბიზნესისთვის. ახლა კლიენტები Google-ში მპოულობენ და ყოველ კვირას 10-15 ახალი ზარი მაქვს.",
       rating: 5,
     },
     {

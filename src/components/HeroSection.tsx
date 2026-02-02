@@ -6,7 +6,7 @@ const HeroSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-24 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
       {/* Background gradient */}
       <div 
         className="absolute inset-0 -z-10"
@@ -26,9 +26,9 @@ const HeroSection = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-up opacity-0 stagger-1">
+          <h1 className="font-heading text-5xl md:text-6xl font-bold leading-tight mb-6 animate-fade-up opacity-0 stagger-1">
             {t('hero.headline')}{" "}
-            <span className="gradient-text">{t('hero.headlineHighlight')}</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">{t('hero.headlineHighlight')}</span>
             <br />
             <span className="text-muted-foreground">{t('hero.headlineEnd')}</span>
           </h1>
