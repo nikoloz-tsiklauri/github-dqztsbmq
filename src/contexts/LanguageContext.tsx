@@ -42,8 +42,8 @@ const translations = {
     'services.subtitle': 'Everything you need to establish a strong online presence and attract more customers.',
     'services.design.title': 'Website Design for Small Businesses',
     'services.design.desc': 'Clean, professional websites tailored to your business. We create designs that build trust with customers and clearly showcase what you offer.',
-    'services.ai.title': 'AI-Powered Content & Images',
-    'services.ai.desc': 'We use smart AI tools to create compelling content and stunning visuals for your website — saving time and keeping costs low without sacrificing quality.',
+    'services.ai.title': 'Modern content and visuals',
+    'services.ai.desc': 'We craft clear, engaging copy and select visuals that present your services in a simple and convincing way. Everything is aligned in one cohesive style — clean and professional.',
     'services.mobile.title': 'Mobile-Optimized & Fast Performance',
     'services.mobile.desc': 'Every website we build looks perfect on phones and tablets. Fast loading speeds mean your customers won\'t wait — and neither will search engines.',
 
