@@ -6,17 +6,17 @@ const HeroSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-24 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-24 bg-gradient-to-b from-white to-blue-50 dark:from-slate-950 dark:to-slate-900 overflow-hidden">
       {/* Background gradient */}
-      <div 
+      <div
         className="absolute inset-0 -z-10"
         style={{ background: 'var(--gradient-hero)' }}
       />
-      
+
       {/* Decorative elements */}
       <div className="absolute top-1/4 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-      
+
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
@@ -26,12 +26,34 @@ const HeroSection = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-heading text-5xl md:text-6xl font-bold leading-tight mb-6 animate-fade-up opacity-0 stagger-1">
-            {t('hero.headline')}{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">{t('hero.headlineHighlight')}</span>
-            <br />
-            <span className="text-muted-foreground">{t('hero.headlineEnd')}</span>
-          </h1>
+          <h1 className="
+                font-heading font-bold tracking-tight
+                text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+                leading-[1.08]
+                mb-6
+                break-words whitespace-normal
+                animate-fade-up opacity-0 stagger-1
+                [text-wrap:balance]
+              "
+            >
+              <span className="block text-foreground">
+                {t("hero.headline")}
+              </span>
+
+              <span className="inline-block gradient-safe bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                {t("hero.headlineHighlight")}
+              </span>
+
+
+
+
+
+
+              <span className="block text-muted-foreground">
+                {t("hero.headlineEnd")}
+              </span>
+        </h1>
+
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-up opacity-0 stagger-2">

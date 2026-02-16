@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap');
+/* Fix: gradient text disappearing in browser/OS dark mode */
+@media (prefers-color-scheme: dark) {
+  .gradient-safe {
+    /* fallback color if browser dark mode affects text-fill */
+    color: rgb(122, 231, 243); /* cyan-200-ish */
+    -webkit-text-fill-color: currentColor;
+  }
+}
 
 @layer base {
   :root {
