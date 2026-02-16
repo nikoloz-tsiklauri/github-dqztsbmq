@@ -32,17 +32,6 @@ const HashScrollFix = () => {
   return null;
 };
 
-// const ScrollToTop = () => {
-//   const { pathname } = useLocation();
-
-//   useEffect(() => {
-//     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-//   }, [pathname]);
-
-//   return null;
-// };
-
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>

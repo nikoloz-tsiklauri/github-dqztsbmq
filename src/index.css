@@ -113,6 +113,19 @@
   * {
     @apply border-border;
   }
+  @layer base {
+    html {
+      scroll-behavior: smooth;
+      color-scheme: light; /* <- ეს არის მთავარი */
+    }
+  
+    body {
+      @apply bg-background text-foreground font-sans antialiased;
+      font-family: 'Inter', system-ui, sans-serif;
+      color-scheme: light; /* <- დამატებით */
+    }
+  }
+  
 
   html {
     scroll-behavior: smooth;
