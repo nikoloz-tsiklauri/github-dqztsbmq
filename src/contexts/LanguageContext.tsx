@@ -119,7 +119,7 @@ const translations = {
     // About
     'about.title': 'About',
     'about.titleHighlight': 'GeorgiaWeb',
-    'about.intro': 'Hi, I\'m Gio — a young web developer based in Georgia with a passion for helping small businesses succeed online.',
+    'about.intro': 'Hi, I\'m Nikolozi — a young web developer based in Georgia with a passion for helping small businesses succeed online.',
     'about.desc1': 'I believe every local business deserves a professional online presence, regardless of their budget. That\'s why I rely on modern design tools and efficient workflows to build beautiful, effective websites without unnecessary costs.',
     'about.desc2': 'My approach is simple: understand your business, create a website that truly represents what you do, and deliver it fast so you can start attracting customers right away.',
     'about.role': 'Web Developer & Designer',

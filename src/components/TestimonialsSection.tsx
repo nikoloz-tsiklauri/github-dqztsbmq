@@ -9,7 +9,7 @@ const TestimonialsSection = () => {
       name: "Davit Khachidze",
       business: "TbilisiHeat - Heating Services",
       avatar: "DK",
-      text: "Gio created an amazing website for my heating business. Now customers find me on Google and I get 10-15 new calls every week. Highly recommend!",
+      text: "Nikolozi created an amazing website for my heating business. Now customers find me on Google and I get 10-15 new calls every week. Highly recommend!",
       rating: 5,
     },
     {

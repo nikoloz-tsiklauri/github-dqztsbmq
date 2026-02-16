@@ -20,7 +20,7 @@ const AboutSection = () => {
                   <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
                     <span className="text-4xl">👨‍💻</span>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Gio</h3>
+                  <h3 className="text-xl font-semibold mb-2">Nikolozi</h3>
                   <p className="text-muted-foreground text-sm mb-4">
                     {t('about.role')}
                   </p>
